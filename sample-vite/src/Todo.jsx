@@ -70,7 +70,7 @@ export const Todo = () => {
       <div>
         {records.map(({ textInputDetail, textInputTime }, index) => (
           <p key={index}>
-            {`【No.${index + 1}】${textInputDetail}`}
+            {`【記録${index + 1}】${textInputDetail}`}
             <span
               style={{ borderBottom: "1px solid black", marginLeft: "20px" }}
             >{`${textInputTime}時間`}</span>
