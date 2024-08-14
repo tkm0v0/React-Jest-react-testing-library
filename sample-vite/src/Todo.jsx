@@ -1,5 +1,6 @@
 import "./styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from './supabase.js';
 
 export const Todo = () => {
   const [form, setForm] = useState({ textInputDetail: "", textInputTime: 0 });
@@ -7,27 +8,53 @@ export const Todo = () => {
   const { textInputDetail, textInputTime } = form;
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    fetchRecords();
+  }, []);
+
+  const fetchRecords = async () => {
+    const { data, error } = await supabase
+      .from('study-record')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) {
+      console.error('Error fetching records:', error);
+      setError("データの取得に失敗しました");
+    } else {
+      setRecords(data);
+    }
+  };
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!textInputDetail || textInputTime === 0) {
       setError("入力されていない項目があります");
       return;
     }
 
-    setRecords([
-      ...records,
-      { textInputDetail, textInputTime: parseInt(textInputTime, 10) },
-    ]);
-    setForm({ textInputDetail: "", textInputTime: 0 }); // フォーム初期化
+    const { data, error } = await supabase
+      .from('study-record')
+      .insert([
+        { textInputDetail, textInputTime: parseInt(textInputTime, 10) }
+      ]);
 
-    setError(""); // エラーメッセージ初期化
+    if (error) {
+      console.error('Error inserting record:', error);
+      setError("データの登録に失敗しました");
+    } else {
+      await fetchRecords();  // 最新のデータを再取得
+      setForm({ textInputDetail: "", textInputTime: 0 }); // フォーム初期化
+      
+      setError(""); // エラーメッセージ初期化
+    }
   };
 
-  // records 内の全ての time を合計
+    // records 内の全ての time を合計
   const totalTime = records.reduce(
     (sum, record) => sum + record.textInputTime,
     0
