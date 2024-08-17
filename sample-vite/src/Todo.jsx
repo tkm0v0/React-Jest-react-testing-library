@@ -3,13 +3,22 @@ import { useState, useEffect } from "react";
 import { supabase } from './supabase.js';
 
 export const Todo = () => {
-  const [form, setForm] = useState({ textInputDetail: "", textInputTime: "" });  // 修正: 初期値を空文字列に
+  const [form, setForm] = useState({ textInputDetail: "", textInputTime: "" });
   const [records, setRecords] = useState([]);
+  const [loading, setLoading] = useState(true); // ローディング用のステートを追加
+  const [loadingText, setLoadingText] = useState("読み込み中です。"); // 読み込み中のテキスト用のステートを追加
   const { textInputDetail, textInputTime } = form;
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetchRecords();
+    const loadData = async () => {
+      setLoadingText("読み込み中です。"); // 初期テキスト設定
+      await fetchRecords();
+      setLoading(false); // データ取得後、ローディングを終了
+      setLoadingText("読み込みが完了しました。"); // データ取得完了後のテキストを設定
+    };
+
+    loadData();
   }, []);
 
   const fetchRecords = async () => {
@@ -32,7 +41,6 @@ export const Todo = () => {
   };
 
   const handleSubmit = async () => {
-    // 修正: textInputTimeが数値として有効かどうかを確認
     if (!textInputDetail || !textInputTime || isNaN(Number(textInputTime))) {
       setError("入力されていない項目があります");
       return;
@@ -43,7 +51,7 @@ export const Todo = () => {
       .insert([
         { 
           textInputDetail, 
-          textInputTime: parseInt(textInputTime, 10)  // 修正: 明示的に数値変換
+          textInputTime: parseInt(textInputTime, 10)
         }
       ]);
 
@@ -51,10 +59,9 @@ export const Todo = () => {
       console.error('Error inserting record:', error);
       setError("データの登録に失敗しました");
     } else {
-      await fetchRecords();  // 最新のデータを再取得
-      setForm({ textInputDetail: "", textInputTime: "" }); // 修正: フォーム初期化
-      
-      setError(""); // エラーメッセージ初期化
+      await fetchRecords(); 
+      setForm({ textInputDetail: "", textInputTime: "" });
+      setError("");
     }
   };
 
@@ -62,6 +69,15 @@ export const Todo = () => {
     (sum, record) => sum + record.textInputTime,
     0
   );
+
+  if (loading) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "white", flexDirection: "column" }}>
+        <h2>loading...</h2>
+        <p>{loadingText}</p> {/* 読み込み中のテキストを表示 */}
+      </div>
+    );
+  }
 
   return (
     <>
