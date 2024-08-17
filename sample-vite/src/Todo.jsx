@@ -5,17 +5,17 @@ import { supabase } from './supabase.js';
 export const Todo = () => {
   const [form, setForm] = useState({ textInputDetail: "", textInputTime: "" });
   const [records, setRecords] = useState([]);
-  const [loading, setLoading] = useState(true); // ローディング用のステートを追加
-  const [loadingText, setLoadingText] = useState("読み込み中です。"); // 読み込み中のテキスト用のステートを追加
+  const [loading, setLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState("読み込み中です。");
   const { textInputDetail, textInputTime } = form;
   const [error, setError] = useState("");
 
   useEffect(() => {
     const loadData = async () => {
-      setLoadingText("読み込み中です。"); // 初期テキスト設定
+      setLoadingText("読み込み中です。");
       await fetchRecords();
-      setLoading(false); // データ取得後、ローディングを終了
-      setLoadingText("読み込みが完了しました。"); // データ取得完了後のテキストを設定
+      setLoading(false);
+      setLoadingText("読み込みが完了しました。");
     };
 
     loadData();
@@ -65,6 +65,21 @@ export const Todo = () => {
     }
   };
 
+  const handleDelete = async (id) => {
+    const { error } = await supabase
+      .from('study-record')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('Error deleting record:', error);
+      setError("データの削除に失敗しました");
+    } else {
+      await fetchRecords();
+      setError("");
+    }
+  };
+
   const totalTime = records.reduce(
     (sum, record) => sum + record.textInputTime,
     0
@@ -74,7 +89,7 @@ export const Todo = () => {
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "white", flexDirection: "column" }}>
         <h2>loading...</h2>
-        <p>{loadingText}</p> {/* 読み込み中のテキストを表示 */}
+        <p>{loadingText}</p>
       </div>
     );
   }
@@ -114,13 +129,21 @@ export const Todo = () => {
         </div>
       </div>
       <div>
-        {records.map(({ textInputDetail, textInputTime }, index) => (
-          <p key={index}>
-            {`【記録${index + 1}】${textInputDetail}`}
-            <span
-              style={{ borderBottom: "1px solid black", marginLeft: "20px" }}
-            >{`${textInputTime}時間`}</span>
-          </p>
+        {records.map(({ id, textInputDetail, textInputTime }, index) => (
+          <div key={id} style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+            <p style={{ margin: 0 }}>
+              {`【記録${index + 1}】${textInputDetail}`}
+              <span
+                style={{ borderBottom: "1px solid black", marginLeft: "20px" }}
+              >{`${textInputTime}時間`}</span>
+            </p>
+            <button 
+              onClick={() => handleDelete(id)}
+              style={{ marginLeft: "20px",  border: "none", padding: "5px 10px", cursor: "pointer" }}
+            >
+              削除
+            </button>
+          </div>
         ))}
       </div>
       <button onClick={handleSubmit}>登録</button>
