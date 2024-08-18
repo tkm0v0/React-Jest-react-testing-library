@@ -5,12 +5,16 @@ import { supabase } from './supabase.js';
 export const Todo = () => {
   const [form, setForm] = useState({ textInputDetail: "", textInputTime: "" });
   const [records, setRecords] = useState([]);
+  //[isLoading, setIsLoading]に変更 岩田
   const [loading, setLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("読み込み中です。");
   const { textInputDetail, textInputTime } = form;
-  const [error, setError] = useState("");
+  //textのエラー表示だと[textError, setTextError]の方が分かりやすいかも？
+  const [textError, setTextError] = useState("");
 
+  //ローディング処理
   useEffect(() => {
+    //loadRecordに変更 岩田
     const loadData = async () => {
       setLoadingText("読み込み中です。");
       await fetchRecords();
@@ -21,6 +25,7 @@ export const Todo = () => {
     loadData();
   }, []);
 
+  //supabaseのデータを取得する処理
   const fetchRecords = async () => {
     const { data, error } = await supabase
       .from('study-record')
@@ -29,24 +34,27 @@ export const Todo = () => {
 
     if (error) {
       console.error('Error fetching records:', error);
-      setError("データの取得に失敗しました");
+      setTextError("データの取得に失敗しました");
     } else {
       setRecords(data);
     }
   };
 
-  const handleChange = (event) => {
+  //記録内容の変更であるためrecordCgangeに変更 岩田
+  const  recordChange = (event) => {
     const { name, value } = event.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  //RecordSubmitに変更 岩田
+  const  recordSubmit = async () => {
     if (!textInputDetail || !textInputTime || isNaN(Number(textInputTime))) {
-      setError("入力されていない項目があります");
+      setTextError("入力されていない項目があります");
       return;
     }
-
-    const { data, error } = await supabase
+    
+    //データの登録処理
+    const { error } = await supabase
       .from('study-record')
       .insert([
         { 
@@ -57,15 +65,17 @@ export const Todo = () => {
 
     if (error) {
       console.error('Error inserting record:', error);
-      setError("データの登録に失敗しました");
+      setTextError("データの登録に失敗しました");
     } else {
       await fetchRecords(); 
       setForm({ textInputDetail: "", textInputTime: "" });
-      setError("");
+      setTextError("");
     }
   };
 
-  const handleDelete = async (id) => {
+  //削除処理
+  //関数名をrecordDeleteに変更
+  const  recordDelete = async (id) => {
     const { error } = await supabase
       .from('study-record')
       .delete()
@@ -73,18 +83,20 @@ export const Todo = () => {
 
     if (error) {
       console.error('Error deleting record:', error);
-      setError("データの削除に失敗しました");
+      setTextError("データの削除に失敗しました");
     } else {
       await fetchRecords();
-      setError("");
+      setTextError("");
     }
   };
 
+  //合計時間の計算処理
   const totalTime = records.reduce(
     (sum, record) => sum + record.textInputTime,
     0
   );
 
+  //ローディング中の表示
   if (loading) {
     return (
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "white", flexDirection: "column" }}>
@@ -106,7 +118,7 @@ export const Todo = () => {
               type="text"
               placeholder="内容"
               value={textInputDetail}
-              onChange={handleChange}
+              onChange={ recordChange}
             />
           </label>
         </div>
@@ -119,7 +131,7 @@ export const Todo = () => {
               min="0"
               placeholder="時間"
               value={textInputTime}
-              onChange={handleChange}
+              onChange={ recordChange}
             />
           </label>
         </div>
@@ -138,7 +150,7 @@ export const Todo = () => {
               >{`${textInputTime}時間`}</span>
             </p>
             <button 
-              onClick={() => handleDelete(id)}
+              onClick={() =>  recordDelete(id)}
               style={{ marginLeft: "20px",  border: "none", padding: "5px 10px", cursor: "pointer" }}
             >
               削除
@@ -146,9 +158,10 @@ export const Todo = () => {
           </div>
         ))}
       </div>
-      <button onClick={handleSubmit}>登録</button>
-      <p>{error && <p style={{ color: "red" }}>{error}</p>} </p>
+      <button onClick={ recordSubmit}>登録</button>
+      <p>{textError && <span style={{ color: "red" }}>{textError}</span>} </p>
       <p>合計時間: {totalTime}/1000（h）</p>
     </>
   );
 };
+//TODO: 後ほど、CSSを別ファイルに切り出します
