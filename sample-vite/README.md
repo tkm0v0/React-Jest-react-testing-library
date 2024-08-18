@@ -123,3 +123,38 @@ Project Console: https://console.firebase.google.com/project/study-record-930dc/
 Hosting URL: https://study-record-930dc.web.app
 @MacBook-Pro sample-vite % 
 ```
+# makeコマンドで一発でデプロイできるようにする
+```
+@MacBook-Pro Chapter1_issue2 % cd sample-vite 
+@MacBook-Pro sample-vite % touch Makefile
+@MacBook-Pro sample-vite % make deploy
+npm run build
+
+> sample-vite@0.0.0 build
+> vite build
+
+vite v5.2.6 building for production...
+✓ 108 modules transformed.
+dist/index.html                    0.45 kB │ gzip:  0.31 kB
+dist/assets/index-DuUS2S-g.css     0.05 kB │ gzip:  0.07 kB
+dist/assets/browser-DG1nDJhn.js    0.57 kB │ gzip:  0.40 kB
+dist/assets/index-DFOREgO1.js    248.02 kB │ gzip: 74.65 kB
+✓ built in 589ms
+firebase deploy
+
+=== Deploying to 'study-record-930dc'...
+
+i  deploying hosting
+i  hosting[study-record-930dc]: beginning deploy...
+i  hosting[study-record-930dc]: found 5 files in dist
+✔  hosting[study-record-930dc]: file upload complete
+i  hosting[study-record-930dc]: finalizing version...
+✔  hosting[study-record-930dc]: version finalized
+i  hosting[study-record-930dc]: releasing new version...
+✔  hosting[study-record-930dc]: release complete
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/study-record-930dc/overview
+Hosting URL: https://study-record-930dc.web.app
+```
