@@ -136,8 +136,8 @@ export const Todo = () => {
           </label>
         </div>
         <div style={{ color: "skyblue" }}>
-          <p>入力されている学習内容：{textInputDetail}</p>
-          <p>入力されている学習時間：{textInputTime}時間</p>
+          <p> &nbsp;&nbsp;入力されている学習内容：{textInputDetail}</p>
+          <p> &nbsp;&nbsp;入力されている学習時間：{textInputTime}時間</p>
         </div>
       </div>
       <div>
