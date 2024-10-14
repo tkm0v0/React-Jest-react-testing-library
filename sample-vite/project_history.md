@@ -182,9 +182,25 @@ Run `npm audit` for details.
 mai@takahashimainoMacBook-Pro sample-vite % 
 ```
 
-# 
+# テスト環境でも.envの環境変数を使えるようにしたいのでdotenvというライブラリをインストールする
 ```
+mai@takahashimainoMacBook-Pro sample-vite % npm i dotenv
 
+added 1 package, and audited 1404 packages in 1s
+
+169 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (1 low, 3 moderate, 8 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+mai@takahashimainoMacBook-Pro sample-vite % 
 ```
 
 # 
