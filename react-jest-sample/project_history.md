@@ -442,11 +442,47 @@ nameMacBook-Pro react-jest-sample %
 ```
 nameMacBook-Pro react-jest-sample % touch .babelrc   
 ```
+# package.jsonに下記を追加する
+```
+    "test": "jest",
+```
 # コマンドからテストを実行する
+```
+nameMacBook-Pro React-Jest-react-testing-library % cd react-jest-sample 
+nameMacBook-Pro react-jest-sample % npm run test
+
+> react-jest-sample@0.0.0 test
+> jest
+
+ PASS  src/tests/sample.spec.js
+  Sample Test
+    ✓ should return true (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.925 s
+Ran all test suites.
+nameMacBook-Pro react-jest-sample % 
+```
+ 
+# 
 ```
 
 ```
 # 
+```
+
+```
+ # 
+```
+
+```
+# 
+```
+
+```
+ # 
 ```
 
 ```
