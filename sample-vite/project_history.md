@@ -227,6 +227,7 @@ nameMacBook-Pro sample-vite %
 ```
 
 # コマンドからテストを実行する
+エラー
 ```
 nameMacBook-Pro sample-vite % npm run test
 
@@ -274,9 +275,24 @@ Ran all test suites.
 nameMacBook-Pro sample-vite % 
 ```
 
-# 
+# コマンドからテストを再実行する
+成功
 ```
+nameMacBook-Pro sample-vite % npm run test
 
+> sample-vite@0.0.0 test
+> jest
+
+ PASS  src/tests/sample.spec.js
+  Sample Test
+    ✓ should return true (2 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        0.791 s
+Ran all test suites.
+nameMacBook-Pro sample-vite % 
 ```
 
 # 
