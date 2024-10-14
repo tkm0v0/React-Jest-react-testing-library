@@ -21,11 +21,6 @@ jobs:
       - name: Run build
         run: npm run build
         working-directory: ./sample-vite  # 実行ディレクトリを設定
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: ./sample-vite/dist
 
   deploy:
     name: deploy
@@ -40,11 +35,6 @@ jobs:
           node-version: "18"
           cache: "npm"
           cache-dependency-path: ./sample-vite/package-lock.json  # 実行ディレクトリを設定
-      - name: Download build artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-          path: ./sample-vite/dist
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
         working-directory: ./sample-vite  # 実行ディレクトリを設定
