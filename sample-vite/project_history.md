@@ -158,9 +158,28 @@ i  hosting[study-record-930dc]: releasing new version...
 Project Console: https://console.firebase.google.com/project/study-record-930dc/overview
 Hosting URL: https://study-record-930dc.web.app
 ```
-# 
+# jestとreact-testing-libraryをインストール
 ```
+mai@takahashimainoMacBook-Pro sample-vite % pwd
+/Users/takahashimai_1/Desktop/_workspace_JISOU/workspace_chapter1-issue2/Chapter1_issue2/sample-vite
+mai@takahashimainoMacBook-Pro sample-vite % npm install --save-dev jest @testing-library/react @testing-library/jest-dom @testing-library/user-event babel-jest @babel/preset-env @babel/preset-react
+(#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠙ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com(#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠙ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com(#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠋ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com
 
+added 439 packages, removed 4 packages, changed 24 packages, and audited 1403 packages in 17s
+
+168 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (1 low, 3 moderate, 8 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+mai@takahashimainoMacBook-Pro sample-vite % 
 ```
 
 # 
