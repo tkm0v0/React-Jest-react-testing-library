@@ -349,9 +349,11 @@ Successfully created /Users/name_1/Desktop/_workspace_JISOU/workspace_React-Jest
 nameMacBook-Pro react-jest-sample % 
 ```
 - 「.eslintrc.cjsを修正する(VSCodeで利用していない変数がエラーになるを防ぐ)」手順については、`.eslintrc.cjs`が含まれていないので、一旦飛ばす。
-# 
-```
 
+# テストを書く(trueがtrueであることを確かめるテスト)
+```
+nameMacBook-Pro react-jest-sample % mkdir src/tests/                
+nameMacBook-Pro react-jest-sample % touch ./src/tests/sample.spec.js
 ```
 
 # 
