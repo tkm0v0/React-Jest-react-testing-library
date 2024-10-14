@@ -466,9 +466,21 @@ Ran all test suites.
 nameMacBook-Pro react-jest-sample % 
 ```
  
-# 
+# テスト通過
 ```
+nameMacBook-Pro react-jest-sample % npm run test                             
 
+> react-jest-sample@0.0.0 test
+> jest
+
+ PASS  src/tests/sample.spec.js
+ PASS  src/tests/componenteSample.spec.jsx
+
+Test Suites: 2 passed, 2 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        1.674 s, estimated 2 s
+Ran all test suites.
 ```
 # 
 ```
