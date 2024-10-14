@@ -24,8 +24,8 @@ jobs:
         run: npm run build
         working-directory: ./sample-vite  # 実行ディレクトリを設定
         env:
-        VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-        VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
         working-directory: ./sample-vite  # 実行ディレクトリを設定
