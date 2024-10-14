@@ -60,7 +60,7 @@ Already logged in as gmail.com
 
 You're about to initialize a Firebase project in this directory:
 
-  /Users/takahashimai_1/Desktop/_workspace_JISOU/workspace_chapter1-issue2/Chapter1_issue2/sample-vite
+  /Users/name_1/Desktop/_workspace_JISOU/workspace_chapter1-issue2/Chapter1_issue2/sample-vite
 
 ? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices. Hosting: Configure files for Firebase Hosting and 
 (optionally) set up GitHub Action deploys
@@ -160,9 +160,9 @@ Hosting URL: https://study-record-930dc.web.app
 ```
 # jestとreact-testing-libraryをインストール
 ```
-mai@takahashimainoMacBook-Pro sample-vite % pwd
-/Users/takahashimai_1/Desktop/_workspace_JISOU/workspace_chapter1-issue2/Chapter1_issue2/sample-vite
-mai@takahashimainoMacBook-Pro sample-vite % npm install --save-dev jest @testing-library/react @testing-library/jest-dom @testing-library/user-event babel-jest @babel/preset-env @babel/preset-react
+nameMacBook-Pro sample-vite % pwd
+/Users/name_1/Desktop/_workspace_JISOU/workspace_chapter1-issue2/Chapter1_issue2/sample-vite
+nameMacBook-Pro sample-vite % npm install --save-dev jest @testing-library/react @testing-library/jest-dom @testing-library/user-event babel-jest @babel/preset-env @babel/preset-react
 (#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠙ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com(#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠙ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com(#######⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂⠂) ⠋ idealTree:@testing-library/jest-dom: timing idealTree:node_modules/@testing-library/jest-dom Com
 
 added 439 packages, removed 4 packages, changed 24 packages, and audited 1403 packages in 17s
@@ -179,12 +179,12 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 
 Run `npm audit` for details.
-mai@takahashimainoMacBook-Pro sample-vite % 
+nameMacBook-Pro sample-vite % 
 ```
 
 # テスト環境でも.envの環境変数を使えるようにしたいのでdotenvというライブラリをインストールする
 ```
-mai@takahashimainoMacBook-Pro sample-vite % npm i dotenv
+nameMacBook-Pro sample-vite % npm i dotenv
 
 added 1 package, and audited 1404 packages in 1s
 
@@ -200,12 +200,30 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 
 Run `npm audit` for details.
-mai@takahashimainoMacBook-Pro sample-vite % 
+nameMacBook-Pro sample-vite % 
 ```
 
-# 
+# npm run testでテストが実行できるようにする
 ```
+nameMacBook-Pro sample-vite % npm install --save-dev jest-environment-jsdom @babel/core @babel/preset-env 
+npm WARN deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+npm WARN deprecated domexception@4.0.0: Use your platform's native DOMException instead
 
+added 42 packages, changed 2 packages, and audited 1446 packages in 4s
+
+171 packages are looking for funding
+  run `npm fund` for details
+
+12 vulnerabilities (1 low, 3 moderate, 8 high)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+nameMacBook-Pro sample-vite % 
 ```
 
 # 
