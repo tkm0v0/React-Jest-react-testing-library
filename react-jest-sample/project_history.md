@@ -438,8 +438,20 @@ found 0 vulnerabilities
 nameMacBook-Pro react-jest-sample % 
 ```
 
+# .babelrcというファイルを作る
+```
+nameMacBook-Pro react-jest-sample % touch .babelrc   
+```
+# コマンドからテストを実行する
+```
+
+```
 # 
 ```
 
 ```
+# 
+```
 
+```
+ 
